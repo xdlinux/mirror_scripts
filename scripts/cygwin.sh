@@ -12,7 +12,8 @@ SYNC_HOME="/home/bigeagle/mirror"
 SYNC_LOGS="$SYNC_HOME/logs/cygwin"
 SYNC_FILES="/srv/ftp/cygwin"
 SYNC_LOCK="$SYNC_HOME/cygwin.lck"
-SYNC_SERVER="rsync://oss6.ustc.edu.cn/pub/cygwin/"
+#SYNC_SERVER="rsync://mirrors6.ustc.edu.cn/cygwin/"
+SYNC_SERVER="rsync://ftp.ipv6.heanet.ie/pub/cygwin/"
 LOG_FILE="cygwin_$(date +%Y%m%d-%H).log"
 
 # Do not edit the following lines, they protect the sync from running more than

@@ -26,8 +26,8 @@ SYNC_REPO=(core extra community pool testing iso)
 #SYNC_SERVER=rsync://mirror.rit.edu/archlinux/
 #SYNC_SERVER=rsync://oss.ustc.edu.cn/pub/archlinux/
 #SYNC_SERVER=rsync://oss6.ustc.edu.cn/pub/archlinux/
-SYNC_SERVER=rsync://mirror6.bjtu.edu.cn/archlinux/
-#SYNC_SERVER=rsync://mirror.yandex.ru/archlinux/
+#SYNC_SERVER=rsync://mirror6.bjtu.edu.cn/archlinux/
+SYNC_SERVER=rsync://mirror.yandex.ru/archlinux/
 # Set the format of the log file name
 # This example will output something like this: sync_20070201-8.log
 LOG_FILE="sync_$(date +%Y%m%d-%H).log"
