@@ -17,7 +17,7 @@ SYNC_LOCK="$SYNC_HOME/centos.lck"
 # Valid options are: core, extra, testing, community, iso
 # Leave empty to sync a complete mirror
 # SYNC_REPO=(core extra testing community iso)
-SYNC_REPO=(5 5.5 5.6 6 6.0)
+SYNC_REPO=(5 5.5 5.6 5.7 6 6.0)
 
 # Set the rsync server to use
 # Only official public mirrors are allowed to use rsync.centos.org
@@ -26,8 +26,8 @@ SYNC_REPO=(5 5.5 5.6 6 6.0)
 #SYNC_SERVER=rsync://mirror.rit.edu/centos/
 #SYNC_SERVER=rsync://oss.ustc.edu.cn/pub/centos/
 #SYNC_SERVER=rsync://oss6.ustc.edu.cn/pub/centos/
-SYNC_SERVER=rsync://mirrors6.ustc.edu.cn/centos/
-#SYNC_SERVER=rsync://mirror.yandex.ru/centos/
+#SYNC_SERVER=rsync://mirrors6.ustc.edu.cn/centos/
+SYNC_SERVER=rsync://mirror.yandex.ru/centos/
 # Set the format of the log file name
 # This example will output something like this: sync_20070201-8.log
 LOG_FILE="sync_$(date +%Y%m%d-%H).log"
