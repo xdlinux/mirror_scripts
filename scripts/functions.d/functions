@@ -1,0 +1,38 @@
+#!/bin/bash
+
+#_PWD=`dirname $0`
+#SCRIPT_DIR=`dirname ${_PWD}`
+#SYNC_HOME=`dirname ${SCRIPT_DIR}`
+
+SYNC_HOME="/home/bigeagle/mirror"
+
+waitall() {
+	local FAIL=0
+	for pid in "$@"; do
+		wait $pid || (( FAIL++ ))
+	done
+	return $FAIL
+}
+
+set_stat()
+{
+	stat_file=$1
+	stat=$2
+	echo $stat > $stat_file
+}
+
+check_dirs()
+{
+	if [ ! -d $SYNC_HOME ]; then
+	  echo "$SYNC_HOME does not exist, please create it, then run this script again."
+	  exit 1
+	fi
+
+	if [ ! -d $SYNC_LOGS ]; then
+		mkdir -p $SYNC_LOGS
+	fi
+
+	if [ ! -d "$SYNC_HOME/status" ]; then
+		mkdir -p "$SYNC_HOME/status"
+	fi
+}
