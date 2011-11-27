@@ -10,11 +10,11 @@
 # Filesystem locations for the sync operations
 SYNC_HOME="/home/bigeagle/mirror"
 SYNC_LOGS="$SYNC_HOME/logs/slackware"
-SYNC_FILES="/srv/ftp/slackware/slackware-13.1/"
+SYNC_FILES="/srv/ftp/slackware/slackware-13.37/"
 SYNC_LOCK="$SYNC_HOME/slackware.lck"
 #SYNC_SERVER="rsync://mirror6.bjtu.edu.cn/slackware/slackware-13.1/"
 #SYNC_SERVER="rsync://mirrors6.ustc.edu.cn/slackware/slackware-13.1/"
-SYNC_SERVER="rsync://mirror.yandex.ru/slackware/slackware-13.1/"
+SYNC_SERVER="rsync://mirror.yandex.ru/slackware/slackware-13.37/"
 LOG_FILE="slackware_$(date +%Y%m%d-%H).log"
 
 # Do not edit the following lines, they protect the sync from running more than

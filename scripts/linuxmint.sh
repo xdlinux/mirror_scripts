@@ -2,38 +2,38 @@
 #
 # The script to sync a local mirror of the Arch Linux repositories and ISOs
 #
-# Copyright (C) 2007 Woody Gilk <woody@debian-security.org>
-# Modifications by Dale Blount <dale@debian-security.org>
-# and Roman Kyrylych <roman@debian-security.org>
+# Copyright (C) 2007 Woody Gilk <woody@linuxmint.org>
+# Modifications by Dale Blount <dale@linuxmint.org>
+# and Roman Kyrylych <roman@linuxmint.org>
 # Justin Wong <justin.w.xd@gmail.com>
 # Licensed under the GNU GPL (version 2)
 
 source `dirname $0`/functions.d/functions
 
 # Filesystem locations for the sync operations
-SYNC_LOGS="$SYNC_HOME/logs/debian-security"
-SYNC_FILES="/srv/ftp/debian-security"
-SYNC_LOCK="$SYNC_HOME/debian-security.lck"
+SYNC_LOGS="$SYNC_HOME/logs/linuxmint"
+SYNC_FILES="/srv/ftp/linuxmint"
+SYNC_LOCK="$SYNC_HOME/linuxmint.lck"
 
 
 # Select which repositories to sync
 #SYNC_REPO=(core extra community pool testing iso)
 
 # Set the rsync server to use
-# Only official public mirrors are allowed to use rsync.debian-security.org
+# Only official public mirrors are allowed to use rsync.linuxmint.org
 
-#SYNC_SERVER=rsync.debian-security.org::ftp
-#SYNC_SERVER=distro.ibiblio.org::distros/debian-security
-#SYNC_SERVER=rsync://mirror.rit.edu/debian-security/
-#SYNC_SERVER=rsync://mirror6.bjtu.edu.cn/debian-security/
-#SYNC_SERVER=rsync://mirror.yandex.ru/debian-security/
-SYNC_SERVER=rsync://mirrors6.ustc.edu.cn/debian-security/
+#SYNC_SERVER=rsync.linuxmint.org::ftp
+#SYNC_SERVER=distro.ibiblio.org::distros/linuxmint
+#SYNC_SERVER=rsync://mirror.rit.edu/linuxmint/
+#SYNC_SERVER=rsync://mirror6.bjtu.edu.cn/linuxmint/
+#SYNC_SERVER=rsync://mirror.yandex.ru/linuxmint/
+SYNC_SERVER=rsync://mirrors6.ustc.edu.cn/linuxmint/
 
 # Set the format of the log file name
 # This example will output something like this: sync_20070201-8.log
 
 LOG_FILE="sync_$(date +%Y%m%d-%H).log"
-STAT_FILE="$SYNC_HOME/status/debian-security"
+STAT_FILE="$SYNC_HOME/status/linuxmint"
 
 # Do not edit the following lines, they protect the sync from running more than
 # one instance at a time
@@ -55,13 +55,6 @@ set_stat $STAT_FILE "-1"
 
 rsync -6 -av --delete-after --exclude *.~tmp~* \
 	--delete-after \
-	--exclude *ia64* \
-	--exclude *alpha* \
-	--exclude *hppa* \
-	--exclude *s390*  \
-	--exclude *kfreebsd*  \
-	--exclude *powerpc*  \
-	--exclude *hurd*  \
 	--exclude *.iso \
 	$SYNC_SERVER "$SYNC_FILES" >> "$SYNC_LOGS/$LOG_FILE"
 

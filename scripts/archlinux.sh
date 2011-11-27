@@ -17,7 +17,7 @@ SYNC_LOCK="$SYNC_HOME/archlinux.lck"
 
 
 # Select which repositories to sync
-SYNC_REPO=(core extra community pool testing iso)
+SYNC_REPO=(core extra community pool testing iso multilib multilib-testing)
 
 # Set the rsync server to use
 # Only official public mirrors are allowed to use rsync.archlinux.org
