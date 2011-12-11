@@ -5,10 +5,12 @@
 # Copyright (C) 2007 Woody Gilk <woody@archlinux.org>
 # Modifications by Dale Blount <dale@archlinux.org>
 # and Roman Kyrylych <roman@archlinux.org>
+# Justin Wong <justin.w.xd@gmail.com>
 # Licensed under the GNU GPL (version 2)
 
+source `dirname $0`/functions.d/functions
+
 # Filesystem locations for the sync operations
-SYNC_HOME="/home/bigeagle/mirror"
 SYNC_LOGS="$SYNC_HOME/logs/fedora"
 SYNC_LOCK="$SYNC_HOME/fedora.lck"
 REL_REPO=(i386 x86_64 source)
@@ -23,17 +25,16 @@ SYNC_DIR="/srv/ftp/fedora/"
 # Set the format of the log file name
 # This example will output something like this: sync_20070201-8.log
 LOG_FILE="fedora_$(date +%Y%m%d-%H).log"
+STAT_FILE="$SYNC_HOME/status/fedora"
 
-# Do not edit the following lines, they protect the sync from running more than
-# one instance at a time
-if [ ! -d $SYNC_HOME ]; then
-echo "$SYNC_HOME does not exist, please create it, then run this script again."
-exit 1
-fi
+check_dirs
 
 [ -f $SYNC_LOCK ] && exit 1
 touch "$SYNC_LOCK"
 # End of non-editable lines
+
+# Set SYNC status to syncing
+set_stat $STAT_FILE "-1"
 
 # Create the log file and insert a timestamp
 touch "$SYNC_LOGS/$LOG_FILE"
@@ -71,7 +72,12 @@ for fver in ${FVER[@]};do
 
 done
 
-wait
+
+waitall `jobs -p`
+set_stat $STAT_FILE $?
+
+date --rfc-3339=seconds > "$SYNC_FILES/lastsync"
+
 # Insert another timestamp and close the log file
 echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 echo ">> Finished sync on $(date --rfc-3339=seconds)" >> "$SYNC_LOGS/$LOG_FILE"
