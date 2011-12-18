@@ -36,10 +36,10 @@ echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 #starting rsync
 
 rsync -6 -avz \
---exclude *ia64* \
---exclude *alpha* \
---exclude *hppa* \
---exclude *s390*  --exclude *source* \
+--exclude *ia64.deb \
+--exclude *alpha.deb \
+--exclude *hppa.deb \
+--exclude *s390.deb  --exclude *source* \
 --exclude *.iso \
 --exclude *.orig.tar.gz --exclude *.diff.gz \
 --exclude *.dsc \
