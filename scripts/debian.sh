@@ -43,13 +43,13 @@ echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 
 rsync -6 --delete-after -av \
 --delete-after \
---exclude *ia64* \
---exclude *alpha* \
---exclude *hppa* \
---exclude *s390*  \
---exclude *kfreebsd*  \
---exclude *powerpc*  \
---exclude *hurd*  \
+--exclude *ia64.deb \
+--exclude *alpha.deb \
+--exclude *hppa.deb \
+--exclude *s390.deb  \
+--exclude *kfreebsd.deb \
+--exclude *powerpc.deb  \
+--exclude *hurd.deb  \
 --exclude *.iso \
 $SYNC_SERVER $SYNC_FILES >> $SYNC_LOGS/$LOG_FILE &
 
