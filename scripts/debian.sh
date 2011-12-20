@@ -20,7 +20,7 @@ SYNC_SERVER="rsync://mirrors6.ustc.edu.cn/debian/"
 #SYNC_SERVER="rsync://mirror6.bjtu.edu.cn/debian/"
 LOG_FILE="debian_$(date +%Y%m%d-%H).log"
 STAT_FILE="$SYNC_HOME/status/debian"
-
+EX_FILE="$SYNC_HOME/scripts/functions.d/debian.exclude"
 # Do not edit the following lines, they protect the sync from running more than
 # one instance at a time
 if [ ! -d $SYNC_HOME ]; then
@@ -43,15 +43,8 @@ echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 
 rsync -6 --delete-after -av \
 --delete-after \
---exclude *ia64.deb \
---exclude *alpha.deb \
---exclude *hppa.deb \
---exclude *s390.deb  \
---exclude *kfreebsd.deb \
---exclude *powerpc.deb  \
---exclude *hurd.deb  \
---exclude *.iso \
-$SYNC_SERVER $SYNC_FILES >> $SYNC_LOGS/$LOG_FILE &
+--exclude-from $EX_FILE \
+$SYNC_SERVER $SYNC_FILES &>> $SYNC_LOGS/$LOG_FILE &
 
 waitall `jobs -p`
 set_stat $STAT_FILE $?

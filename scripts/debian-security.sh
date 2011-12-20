@@ -33,6 +33,7 @@ SYNC_SERVER=rsync://mirrors6.ustc.edu.cn/debian-security/
 # This example will output something like this: sync_20070201-8.log
 
 LOG_FILE="sync_$(date +%Y%m%d-%H).log"
+EX_FILE="$SYNC_HOME/scripts/functions.d/debian.exclude"
 STAT_FILE="$SYNC_HOME/status/debian-security"
 
 # Do not edit the following lines, they protect the sync from running more than
@@ -55,14 +56,7 @@ set_stat $STAT_FILE "-1"
 
 rsync -6 -av --delete-after --exclude *.~tmp~* \
     --delete-after \
-    --exclude *ia64.deb \
-    --exclude *alpha.deb \
-    --exclude *hppa.deb \
-    --exclude *s390.deb  \
-    --exclude *kfreebsd.deb \
-    --exclude *powerpc.deb  \
-    --exclude *hurd.deb  \
-    --exclude *.iso \
+	--exclude-from $EX_FILE \
 	$SYNC_SERVER "$SYNC_FILES" >> "$SYNC_LOGS/$LOG_FILE"
 
     # Create $repo.lastsync file with timestamp like "2007-05-02 03:41:08+03:00"
