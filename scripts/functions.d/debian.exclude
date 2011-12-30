@@ -4,6 +4,8 @@
 *Contents-powerpc.gz
 *Contents-s390.gz
 *Contents-s390x.gz
+*Contents-hurd-i386.gz
+*Contents-kfreebsd*
 *binary-ia64
 *binary-alpha
 *binary-hppa

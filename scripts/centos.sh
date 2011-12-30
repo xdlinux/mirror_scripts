@@ -16,7 +16,7 @@ SYNC_FILES="/srv/ftp/centos"
 SYNC_LOCK="$SYNC_HOME/centos.lck"
 
 # Select which repositories to sync
-SYNC_REPO=(5 5.5 5.6 5.7 6 6.0 6.1 6.2)
+SYNC_REPO=(5 5.7 6 6.1 6.2)
 
 # Set the rsync server to use
 # Only official public mirrors are allowed to use rsync.centos.org
