@@ -5,7 +5,7 @@ FAIL=""
 INPRO=""
 for REPO in `ls $STAT_DIR`;do
     STAT=$(get_stat $STAT_DIR/$REPO "status")
-	if [ $STAT != '0' ];then
+	if [ $STAT -gt 0 ];then
 		FAIL="$REPO,$FAIL"
 	elif [ $STAT == '-1' ];then
 		INPRO="$REPO,$INPRO"	
@@ -26,14 +26,13 @@ else
 	TWEET=$month"月"$day"日的"$FAIL"源同步失败了,好伤心,好郁闷,下次我一定努力!"
 fi
 
-KEY='JFVFTRQU4DJ6M4Zc'
+KEY=`cat $SYNC_HOME/KEY`
 URL='http://xdtuxbot.appspot.com/tweet?msg='$TWEET'&key='$KEY
 echo $TWEET
-curl $URL
-echo $INPRO
+#curl $URL
 if [ ! -z $INPRO ];then
 	TWEET="为何"$INPRO"源到现在还没同步完...好不给力的校园网"
 	URL='http://xdtuxbot.appspot.com/tweet?msg='$TWEET'&key='$KEY
 	echo $TWEET
-	curl $URL
+	#curl $URL
 fi

@@ -27,11 +27,11 @@ set_stat()
 {
 	_file=$1
     if [ ! -f $_file ];then
-        echo "{'discription':'','status':'','upstream':'','lastsync':'','log':''}" > $_file
+        echo '{"discription":"","status":"","upstream":"","lastsync":"","log":""}' > $_file
     fi
     _item=$2
 	_value=$3
-    _json=`perl -pe "s|('$_item':).*?,|\1'$_value',|" $_file`
+	_json=`perl -pe "s|(\"$_item\":).*?([,}])|\1\"$_value\"\2|" $_file`
     echo $_json > $_file
 }
 
@@ -39,7 +39,7 @@ get_stat()
 {
     _file=$1
     _item=$2
-    echo `perl -pe "s/.*?'$_item':'(.*?)'[,}].*/\1/" $_file`
+    echo `perl -pe "s/.*?\"$_item\":\"(.*?)\"[,}].*/\1/" $_file`
 }
 
 check_dirs()

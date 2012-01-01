@@ -13,11 +13,14 @@ lockid="$!"
 
 echo "{" > $JSON
 for REPO in `ls $STAT_DIR`;do
-    LOG=`ls -t $LOG_DIR/$REPO|head -1` 
-    cp "$LOG_DIR/$REPO/$LOG" "$SRV_ROOT$LOG_URL/$REPO.log"
+	STATUS=`get_stat $STAT_DIR/$REPO "status"`
+    if [ $STATUS != '-1' ];then
+		LOG=`ls -t $LOG_DIR/$REPO|head -1` 
+		cp "$LOG_DIR/$REPO/$LOG" "$SRV_ROOT$LOG_URL/$REPO.log"
+	fi
     set_stat $STAT_DIR/$REPO "log" "$LOG_URL/$REPO.log"
 	STAT=`cat $STAT_DIR/$REPO`
-	echo "	\"$REPO\":$STAT," >> $JSON
+	echo "    \"$REPO\":$STAT," >> $JSON
 done
 sed -i -e '$s/\(.*\)\,$/\1/g' $JSON
 echo } >> $JSON
