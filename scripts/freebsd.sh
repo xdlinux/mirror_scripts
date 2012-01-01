@@ -12,13 +12,13 @@ SYNC_SERVER=ftp.ipv6.heanet.ie
 
 set_stat $STAT_FILE "status" "-1"
 set_stat $STAT_FILE "upstream" $SYNC_SERVER
-rsync -6 -avz --delete-after rsync://$SYNC_SERVER/FreeBSD/ports/amd64/packages-8-stable /srv/ftp/freebsd/ports/amd64/ >>/home/bigeagle/mirror/logs/freebsd/$amd64_LOG_FILE & 
+rsync -6 -avz --delete-after rsync://$SYNC_SERVER/FreeBSD/ports/amd64/packages-8-stable /srv/ftp/freebsd/ports/amd64/ >>/home/bigeagle/mirror/logs/FreeBSD/$amd64_LOG_FILE & 
 
-rsync -6 -avz --delete-after rsync://$SYNC_SERVER/FreeBSD/ports/i386/packages-8-stable /srv/ftp/freebsd/ports/i386/ >>/home/bigeagle/mirror/logs/freebsd/$i386_LOG_FILE & 
+rsync -6 -avz --delete-after rsync://$SYNC_SERVER/FreeBSD/ports/i386/packages-8-stable /srv/ftp/freebsd/ports/i386/ >>/home/bigeagle/mirror/logs/FreeBSD/$i386_LOG_FILE & 
 
-rsync -6 -avz --delete-after rsync://$SYNC_SERVER/FreeBSD/ports/sparc64/packages-8-stable /srv/ftp/freebsd/ports/sparc64/ >>/home/bigeagle/mirror/logs/freebsd/$sparc64_LOG_FILE & 
+rsync -6 -avz --delete-after rsync://$SYNC_SERVER/FreeBSD/ports/sparc64/packages-8-stable /srv/ftp/freebsd/ports/sparc64/ >>/home/bigeagle/mirror/logs/FreeBSD/$sparc64_LOG_FILE & 
 
-rsync -6 -avz --delete-after rsync://$SYNC_SERVER/FreeBSD/ports/powerpc/packages-8-stable /srv/ftp/freebsd/ports/powerpc/ >>/home/bigeagle/mirror/logs/freebsd/$powerpc_LOG_FILE & 
+rsync -6 -avz --delete-after rsync://$SYNC_SERVER/FreeBSD/ports/powerpc/packages-8-stable /srv/ftp/freebsd/ports/powerpc/ >>/home/bigeagle/mirror/logs/FreeBSD/$powerpc_LOG_FILE & 
 
 waitall `jobs -p`
 set_stat $STAT_FILE "status" $?

@@ -1,11 +1,11 @@
 #!/bin/bash
-STAT_DIR="/home/work/mirror/status"
-
+source  `dirname $0`/functions.d/functions
+STAT_DIR="$SYNC_HOME/status"
 FAIL=""
 INPRO=""
 for REPO in `ls $STAT_DIR`;do
-	STAT=`cat $STAT_DIR/$REPO`
-	if [ $STAT == '1' ];then
+    STAT=$(get_stat $STAT_DIR/$REPO "status")
+	if [ $STAT != '0' ];then
 		FAIL="$REPO,$FAIL"
 	elif [ $STAT == '-1' ];then
 		INPRO="$REPO,$INPRO"	
