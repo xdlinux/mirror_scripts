@@ -30,7 +30,8 @@ fi
 touch "$SYNC_LOCK"
 # End of non-editable lines
 
-set_stat $STAT_FILE "-1"
+set_stat $STAT_FILE "status" "-1"
+set_stat $STAT_FILE "upstream" $SYNC_SERVER
 # Create the log file and insert a timestamp
 touch "$SYNC_LOGS/$LOG_FILE"
 echo "=============================================" >> "$SYNC_LOGS/$LOG_FILE"
@@ -40,7 +41,8 @@ echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 
 rsync -6 -avz --delete-after --exclude *.~tmp~*  $SYNC_SERVER $SYNC_FILES >> $SYNC_LOGS/$LOG_FILE
 
-set_stat $STAT_FILE $?
+set_stat $STAT_FILE "status" $?
+set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds`
 
 # Insert another timestamp and close the log file
 echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"

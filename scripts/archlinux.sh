@@ -5,7 +5,7 @@
 # Copyright (C) 2007 Woody Gilk <woody@archlinux.org>
 # Modifications by Dale Blount <dale@archlinux.org>
 # and Roman Kyrylych <roman@archlinux.org>
-# Justin Wong <justin.w.xd@gmail.com>
+# Justin Wong <bigeagle@xdlinux.info>
 # Licensed under the GNU GPL (version 2)
 
 source `dirname $0`/functions.d/functions
@@ -14,7 +14,6 @@ source `dirname $0`/functions.d/functions
 SYNC_LOGS="$SYNC_HOME/logs/archlinux"
 SYNC_FILES="/srv/ftp/archlinux"
 SYNC_LOCK="$SYNC_HOME/archlinux.lck"
-
 
 # Select which repositories to sync
 SYNC_REPO=(core extra community pool testing iso multilib multilib-testing)
@@ -51,7 +50,8 @@ echo ">> Starting sync on $(date --rfc-3339=seconds)" >> "$SYNC_LOGS/$LOG_FILE"
 echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 
 # Set SYNC status to syncing
-set_stat $STAT_FILE "-1"
+set_stat $STAT_FILE "status" "-1"
+set_stat $STAT_FILE "upstream" "$SYNC_SERVER"
 
 if [ -z $SYNC_REPO ]; then
   # Sync a complete mirror
@@ -74,7 +74,8 @@ fi
 
 #wait background updates to finish
 waitall `jobs -p`
-set_stat $STAT_FILE $?
+set_stat $STAT_FILE "status" $?
+set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds`
 
 date --rfc-3339=seconds > "$SYNC_FILES/lastsync"
 

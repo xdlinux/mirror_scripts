@@ -7,6 +7,8 @@
 # and Roman Kyrylych <roman@archlinux.org>
 # Licensed under the GNU GPL (version 2)
 
+source  `dirname $0`/functions.d/functions
+
 # Filesystem locations for the sync operations
 SYNC_HOME="/home/bigeagle/mirror"
 SYNC_LOGS="$SYNC_HOME/logs/CTAN"
@@ -17,6 +19,8 @@ SYNC_LOCK="$SYNC_HOME/CTAN.lck"
 #SYNC_SERVER="rsync://oss6.ustc.edu.cn/pub/CTAN/"
 SYNC_SERVER="rsync://mirrors.xmu6.edu.cn/CTAN/"
 LOG_FILE="CTAN_$(date +%Y%m%d-%H).log"
+
+STAT_FILE="$SYNC_HOME/status/CTAN"
 
 # Do not edit the following lines, they protect the sync from running more than
 # one instance at a time
@@ -35,9 +39,13 @@ echo "=============================================" >> "$SYNC_LOGS/$LOG_FILE"
 echo ">> Starting sync on $(date --rfc-3339=seconds)" >> "$SYNC_LOGS/$LOG_FILE"
 echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 #starting rsync
+set_stat $STAT_FILE "status" "-1"
+set_stat $STAT_FILE "upstream" $SYNC_SERVER
 
 rsync -6 -avz --delete-after --exclude *.~tmp~*  $SYNC_SERVER $SYNC_FILES >> $SYNC_LOGS/$LOG_FILE
 
+set_stat $STAT_FILE "status" $?
+set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds`
 # Insert another timestamp and close the log file
 echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 echo ">> Finished sync on $(date --rfc-3339=seconds)" >> "$SYNC_LOGS/$LOG_FILE"

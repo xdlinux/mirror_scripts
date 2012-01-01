@@ -5,6 +5,7 @@
 #SYNC_HOME=`dirname ${SCRIPT_DIR}`
 
 SYNC_HOME="/home/bigeagle/mirror"
+LOG_URL="/index/mlog/"
 
 waitall() {
 	local FAIL=0
@@ -14,11 +15,25 @@ waitall() {
 	return $FAIL
 }
 
+
+# set_stat $file $item $value
+# status file is JSON formated as:
+#{
+#    'status': 0, //-1 for syncing, 0 for success, other for fail
+#    'upstream':'rsync://upstream',
+#    'log':'mirror.log'
+#}
+
 set_stat()
 {
-	stat_file=$1
-	stat=$2
-	echo $stat > $stat_file
+	file=$1
+    if [ ! -f $file ];then
+        echo "{'discription':'','status':'','upstream':'','lastsync':'','log':''}" > $file
+    fi
+    item=$2
+	value=$3
+    json=`perl -pe "s|('$item':).*?,|\1'$value',|" $file`
+    echo $json > $file
 }
 
 check_dirs()

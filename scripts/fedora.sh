@@ -5,7 +5,7 @@
 # Copyright (C) 2007 Woody Gilk <woody@archlinux.org>
 # Modifications by Dale Blount <dale@archlinux.org>
 # and Roman Kyrylych <roman@archlinux.org>
-# Justin Wong <justin.w.xd@gmail.com>
+# Justin Wong <bigeagle@xdlinux.info>
 # Licensed under the GNU GPL (version 2)
 
 source `dirname $0`/functions.d/functions
@@ -34,7 +34,8 @@ touch "$SYNC_LOCK"
 # End of non-editable lines
 
 # Set SYNC status to syncing
-set_stat $STAT_FILE "-1"
+set_stat $STAT_FILE "status" "-1"
+set_stat $STAT_FILE "upstream" $SYNC_SERVER
 
 # Create the log file and insert a timestamp
 touch "$SYNC_LOGS/$LOG_FILE"
@@ -74,7 +75,8 @@ done
 
 
 waitall `jobs -p`
-set_stat $STAT_FILE $?
+set_stat $STAT_FILE "status" $?
+set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds`
 
 date --rfc-3339=seconds > "$SYNC_FILES/lastsync"
 

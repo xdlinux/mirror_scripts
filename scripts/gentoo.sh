@@ -21,7 +21,8 @@ LOG_FILE="gentoo_$(date +%Y%m%d-%H).log"
 
 STAT_FILE="$SYNC_HOME/status/gentoo"
 
-set_stat $STAT_FILE "-1"
+set_stat $STAT_FILE "status" "-1"
+set_stat $STAT_FILE "upstream" $SYNC_SERVER
 # Do not edit the following lines, they protect the sync from running more than
 # one instance at a time
 if [ ! -d $SYNC_HOME ]; then
@@ -43,7 +44,8 @@ echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 
 rsync -6 -av --delete-after --exclude *.~tmp~*  $SYNC_SERVER $SYNC_FILES >> $SYNC_LOGS/$LOG_FILE
 
-set_stat $STAT_FILE $?
+set_stat $STAT_FILE "status" $?
+set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds`
 
 date --rfc-3339=seconds > "$SYNC_FILES/lastsync"
 # Insert another timestamp and close the log file

@@ -7,6 +7,7 @@
 # and Roman Kyrylych <roman@archlinux.org>
 # Licensed under the GNU GPL (version 2)
 
+source  `dirname $0`/functions.d/functions
 # Filesystem locations for the sync operations
 SYNC_HOME="/home/bigeagle/mirror"
 REPONAME="rpmfusion"
@@ -21,7 +22,7 @@ SYNC_DIR="/srv/ftp/fedora/rpmfusion"
 # Set the format of the log file name
 # This example will output something like this: sync_20070201-8.log
 LOG_FILE="rpmfusion_$(date +%Y%m%d-%H).log"
-
+STAT_FILE="$SYNC_HOME/status/rpmfusion"
 # Do not edit the following lines, they protect the sync from running more than
 # one instance at a time
 if [ ! -d $SYNC_HOME ]; then
@@ -33,6 +34,8 @@ fi
 touch "$SYNC_LOCK"
 # End of non-editable lines
 
+set_stat $STAT_FILE "status" "-1"
+set_stat $STAT_FILE "upstream" $SYNC_SERVER
 # Create the log file and insert a timestamp
 touch "$SYNC_LOGS/$LOG_FILE"
 echo "=============================================" >> "$SYNC_LOGS/$LOG_FILE"
@@ -66,7 +69,9 @@ for FREE in ${SYNC_FREE[@]};do
 done
 done
 
-wait
+waitall `jobs -p`
+set_stat $STAT_FILE "status" $?
+set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds`
 # Insert another timestamp and close the log file
 echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 echo ">> Finished sync on $(date --rfc-3339=seconds)" >> "$SYNC_LOGS/$LOG_FILE"
