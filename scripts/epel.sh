@@ -27,7 +27,7 @@ SYNC_REPO=(5 6)
 #SYNC_SERVER=rsync://mirror.rit.edu/epel/
 #SYNC_SERVER=rsync://mirror6.bjtu.edu.cn/epel/
 #SYNC_SERVER=rsync://mirror.yandex.ru/epel/
-SYNC_SERVER=rsync://mirrors6.ustc.edu.cn/epel
+SYNC_SERVER=rsync://mirror6.bjtu.edu.cn/fedora-epel
 
 # Set the format of the log file name
 # This example will output something like this: sync_20070201-8.log

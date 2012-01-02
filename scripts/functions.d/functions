@@ -27,7 +27,7 @@ set_stat()
 {
 	_file=$1
     if [ ! -f $_file ];then
-        echo '{"discription":"","status":"","upstream":"","lastsync":"","log":""}' > $_file
+        echo '{"discription":"","icon":"","status":"","upstream":"","lastsync":"","log":""}' > $_file
     fi
     _item=$2
 	_value=$3
@@ -51,6 +51,10 @@ check_dirs()
 
 	if [ ! -d $SYNC_LOGS ]; then
 		mkdir -p $SYNC_LOGS
+	fi
+	
+	if [ ! -d $SYNC_FILES ]; then
+		mkdir -p $SYNC_FILES
 	fi
 
 	if [ ! -d "$SYNC_HOME/status" ]; then

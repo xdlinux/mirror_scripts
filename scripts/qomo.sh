@@ -13,7 +13,7 @@ SYNC_HOME="/home/bigeagle/mirror"
 SYNC_LOGS="$SYNC_HOME/logs/qomo"
 SYNC_FILES="/srv/ftp/qomo/current"
 SYNC_LOCK="$SYNC_HOME/qomo.lck"
-SYNC_SERVER="rsync://mirrors6.ustc.edu.cn/qomo/current/"
+SYNC_SERVER="rsync://mirror6.bjtu.edu.cn/qomo/current/"
 LOG_FILE="qomo_$(date +%Y%m%d-%H).log"
 
 STAT_FILE="$SYNC_HOME/status/qomo"
