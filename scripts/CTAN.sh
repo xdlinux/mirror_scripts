@@ -45,7 +45,7 @@ set_stat $STAT_FILE "upstream" $SYNC_SERVER
 rsync -6 -avz --delete-after --exclude *.~tmp~*  $SYNC_SERVER $SYNC_FILES >> $SYNC_LOGS/$LOG_FILE
 
 set_stat $STAT_FILE "status" $?
-set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds`
+set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds|sed 's/\ /\\ /'`
 # Insert another timestamp and close the log file
 echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 echo ">> Finished sync on $(date --rfc-3339=seconds)" >> "$SYNC_LOGS/$LOG_FILE"

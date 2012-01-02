@@ -35,7 +35,7 @@ touch "$SYNC_LOCK"
 # End of non-editable lines
 
 set_stat $STAT_FILE "status" "-1"
-set_stat $STAT_FILE "upstream" $SYNC_SERVER
+set_stat $STAT_FILE "upstream" $SERVER_BASE
 # Create the log file and insert a timestamp
 touch "$SYNC_LOGS/$LOG_FILE"
 echo "=============================================" >> "$SYNC_LOGS/$LOG_FILE"
@@ -71,7 +71,7 @@ done
 
 waitall `jobs -p`
 set_stat $STAT_FILE "status" $?
-set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds`
+set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds|sed 's/\ /\\ /'`
 # Insert another timestamp and close the log file
 echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 echo ">> Finished sync on $(date --rfc-3339=seconds)" >> "$SYNC_LOGS/$LOG_FILE"

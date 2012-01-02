@@ -27,7 +27,7 @@ SYNC_REPO=(5 6)
 #SYNC_SERVER=rsync://mirror.rit.edu/epel/
 #SYNC_SERVER=rsync://mirror6.bjtu.edu.cn/epel/
 #SYNC_SERVER=rsync://mirror.yandex.ru/epel/
-SYNC_SERVER=rsync://mirror6.bjtu.edu.cn/fedora-epel
+SYNC_SERVER="rsync://mirror6.bjtu.edu.cn/fedora-epel"
 
 # Set the format of the log file name
 # This example will output something like this: sync_20070201-8.log
@@ -76,7 +76,7 @@ fi
 #wait background updates to finish
 waitall `jobs -p`
 set_stat $STAT_FILE "status" $?
-set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds`
+set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds|sed 's/\ /\\ /'`
 
 date --rfc-3339=seconds > "$SYNC_FILES/lastsync"
 
