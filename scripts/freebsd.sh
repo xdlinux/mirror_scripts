@@ -22,4 +22,4 @@ rsync -6 -avz --delete-after rsync://$SYNC_SERVER/FreeBSD/ports/powerpc/packages
 
 waitall `jobs -p`
 set_stat $STAT_FILE "status" $?
-set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds|sed 's/\ /\\ /'`
+set_stat $STAT_FILE "lastsync" "`date --rfc-3339=seconds|sed 's/\ /\\ /'`"

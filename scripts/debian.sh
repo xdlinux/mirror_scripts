@@ -49,7 +49,7 @@ $SYNC_SERVER $SYNC_FILES &>> $SYNC_LOGS/$LOG_FILE &
 
 waitall `jobs -p`
 set_stat $STAT_FILE "status" $?
-set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds|sed 's/\ /\\ /'`
+set_stat $STAT_FILE "lastsync" "`date --rfc-3339=seconds|sed 's/\ /\\ /'`"
 
 date --rfc-3339=seconds > "$SYNC_FILES/lastsync"
 # Insert another timestamp and close the log file
