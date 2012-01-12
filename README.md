@@ -1,6 +1,14 @@
 西电开源社区软件源同步脚本
+===
 
-Copyright (C) 2010 Justin Wong <justin.w.xd(at)gmail(dot)com>
+TODO
+---
+* 使用 ftpsync 同步debian和ubuntu
+
+
+LICENSE
+---
+Copyright (C) 2010 Justin Wong <bigeagle(at)xdlinux(dot)info>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
