@@ -29,10 +29,10 @@ fi
 KEY=`cat $SYNC_HOME/KEY`
 URL='http://xdtuxbot.appspot.com/tweet?msg='$TWEET'&key='$KEY
 echo $TWEET
-#curl $URL
+curl $URL
 if [ ! -z $INPRO ];then
 	TWEET="为何"$INPRO"源到现在还没同步完...好不给力的校园网"
 	URL='http://xdtuxbot.appspot.com/tweet?msg='$TWEET'&key='$KEY
 	echo $TWEET
-	#curl $URL
+	curl $URL
 fi
