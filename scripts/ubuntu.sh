@@ -15,7 +15,8 @@ SYNC_FILES="/srv/ftp/ubuntu"
 SYNC_LOCK="$SYNC_HOME/ubuntu.lck"
 #SYNC_SERVER=rsync://ubuntu.dormforce.net/ubuntu
 #SYNC_SERVER=rsync://debian.ustc.edu.cn/ubuntu
-SYNC_SERVER=rsync://mirrors6.ustc.edu.cn/ubuntu
+#SYNC_SERVER=rsync://mirrors6.ustc.edu.cn/ubuntu
+SYNC_SERVER=rsync://ftp.ipv6.heanet.ie/mirrors/ubuntu/
 #SYNC_SERVER=rsync://mirrors.xmu6.edu.cn/ubuntu-archive
 LOG_FILE="ubuntu_$(date +%Y%m%d-%H).log"
 
@@ -52,7 +53,7 @@ rsync -6 -av --delete-after \
 $SYNC_SERVER $SYNC_FILES >> $SYNC_LOGS/$LOG_FILE
 
 set_stat $STAT_FILE "status" $?
-set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds`
+set_stat $STAT_FILE "lastsync" "`date --rfc-3339=seconds|sed 's/\ /\\ /'`"
 date --rfc-3339=seconds > "$SYNC_FILES/lastsync"
 
 # Insert another timestamp and close the log file

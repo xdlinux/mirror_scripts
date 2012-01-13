@@ -35,7 +35,7 @@ touch "$SYNC_LOCK"
 
 # Set SYNC status to syncing
 set_stat $STAT_FILE "status" "-1"
-set_stat $STAT_FILE "upstream" $SYNC_SERVER
+set_stat $STAT_FILE "upstream" $SERVER_BASE1
 
 # Create the log file and insert a timestamp
 touch "$SYNC_LOGS/$LOG_FILE"
@@ -76,7 +76,7 @@ done
 
 waitall `jobs -p`
 set_stat $STAT_FILE "status" $?
-set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds`
+set_stat $STAT_FILE "lastsync" "`date --rfc-3339=seconds|sed 's/\ /\\ /'`"
 
 date --rfc-3339=seconds > "$SYNC_FILES/lastsync"
 

@@ -64,7 +64,7 @@ rsync -6 -av --delete-after --exclude *.~tmp~* \
 
 #wait background updates to finish
 set_stat $STAT_FILE "status" $?
-set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds`
+set_stat $STAT_FILE "lastsync" "`date --rfc-3339=seconds|sed 's/\ /\\ /'`"
 
 date --rfc-3339=seconds > "$SYNC_FILES/lastsync"
 
