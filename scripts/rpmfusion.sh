@@ -11,7 +11,7 @@ source  `dirname $0`/functions.d/functions
 # Filesystem locations for the sync operations
 SYNC_HOME="/home/bigeagle/mirror"
 REPONAME="rpmfusion"
-SYNC_LOGS="$SYNC_HOME/logs/fedora"
+SYNC_LOGS="$SYNC_HOME/logs/rpmfusion"
 SYNC_LOCK="$SYNC_HOME/$REPONAME.lck"
 SYNC_REPO=(i386 x86_64)
 SYNC_FREE=(free nonfree)

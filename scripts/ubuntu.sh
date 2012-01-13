@@ -15,7 +15,8 @@ SYNC_FILES="/srv/ftp/ubuntu"
 SYNC_LOCK="$SYNC_HOME/ubuntu.lck"
 #SYNC_SERVER=rsync://ubuntu.dormforce.net/ubuntu
 #SYNC_SERVER=rsync://debian.ustc.edu.cn/ubuntu
-SYNC_SERVER=rsync://mirrors6.ustc.edu.cn/ubuntu
+#SYNC_SERVER=rsync://mirrors6.ustc.edu.cn/ubuntu
+SYNC_SERVER=rsync://ftp.ipv6.heanet.ie/mirrors/ubuntu/
 #SYNC_SERVER=rsync://mirrors.xmu6.edu.cn/ubuntu-archive
 LOG_FILE="ubuntu_$(date +%Y%m%d-%H).log"
 
