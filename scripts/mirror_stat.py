@@ -42,8 +42,9 @@ def update_json():
         repo_log_dir = os.path.join( LOG_DIR, repo )
         if status != '-1':
             try:
+                repo_stat['log'] = repo_stat['log']  or os.path.join(LOG_URL, repo+'.log') 
                 slog = os.path.join( repo_log_dir, getlog(repo_log_dir) )
-                dlog = SRV_ROOT + ( repo_stat['log']  or os.path.join(LOG_URL, repo+'.log') )
+                dlog = SRV_ROOT + repo_stat['log']
                 sp.call( ['cp',slog,dlog] ) 
             except:
                 pass

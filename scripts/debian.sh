@@ -43,8 +43,8 @@ echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 #starting rsync
 
 rsync -6 --delete-after -av \
---delete-after \
---exclude-from $EX_FILE \
+	--delete-after \
+	--exclude-from $EX_FILE \
 $SYNC_SERVER $SYNC_FILES &>> $SYNC_LOGS/$LOG_FILE &
 
 waitall `jobs -p`

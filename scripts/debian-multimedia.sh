@@ -41,10 +41,6 @@ echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 
 rsync -6 -avz \
 --exclude-from $EX_FILE \
---exclude *s390.deb  --exclude *source* \
---exclude *.iso \
---exclude *.orig.tar.gz --exclude *.diff.gz \
---exclude *.dsc \
 $SYNC_SERVER $SYNC_FILES >> $SYNC_LOGS/$LOG_FILE 
 
 set_stat $STAT_FILE "status" $?
