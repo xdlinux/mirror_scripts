@@ -75,7 +75,7 @@ fi
 #wait background updates to finish
 waitall `jobs -p`
 set_stat $STAT_FILE "status" $?
-set_stat $STAT_FILE "lastsync" `date --rfc-3339=seconds|sed 's/\ /\\ /'`
+set_stat $STAT_FILE "lastsync" "`date --rfc-3339=seconds|sed 's/\ /\\ /'`"
 
 date --rfc-3339=seconds > "$SYNC_FILES/lastsync"
 
