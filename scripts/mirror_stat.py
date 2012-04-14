@@ -9,7 +9,7 @@ import pyinotify
 import json
 import daemon
 
-SYNC_HOME = os.path.dirname( os.getcwd() )
+SYNC_HOME = os.path.dirname( os.path.abspath( os.path.dirname(__file__) ) )
 STAT_DIR = os.path.join( SYNC_HOME, "status" )
 LOG_DIR = os.path.join( SYNC_HOME, "logs" )
 JSON = "/srv/www/m_status.json"
@@ -52,10 +52,11 @@ def update_json():
         f.close()
     json_out = json.dumps( output, sort_keys=True, indent=4 )
 
-    f = open( JSON, 'w' )
-    fcntl.flock( f, fcntl.LOCK_SH ) 
-    f.write( json_out )
-    fcntl.flock( f, fcntl.LOCK_UN )
+    with open( JSON, 'w' ) as f:
+        fcntl.flock( f, fcntl.LOCK_SH ) 
+        f.write( json_out )
+        fcntl.flock( f, fcntl.LOCK_UN )
+
 
 def inotify_loop():
     IN_MODIFY = pyinotify.IN_MODIFY

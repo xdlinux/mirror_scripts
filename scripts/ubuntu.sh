@@ -15,8 +15,8 @@ SYNC_FILES="/srv/ftp/ubuntu"
 SYNC_LOCK="$SYNC_HOME/ubuntu.lck"
 #SYNC_SERVER=rsync://ubuntu.dormforce.net/ubuntu
 #SYNC_SERVER=rsync://debian.ustc.edu.cn/ubuntu
-#SYNC_SERVER=rsync://mirrors6.ustc.edu.cn/ubuntu
-SYNC_SERVER=rsync://ftp.ipv6.heanet.ie/mirrors/ubuntu/
+SYNC_SERVER=rsync://mirrors6.ustc.edu.cn/ubuntu
+#SYNC_SERVER=rsync://ftp.ipv6.heanet.ie/mirrors/ubuntu/
 #SYNC_SERVER=rsync://mirrors.xmu6.edu.cn/ubuntu-archive
 LOG_FILE="ubuntu_$(date +%Y%m%d-%H).log"
 
@@ -42,7 +42,7 @@ echo ">> Starting sync on $(date --rfc-3339=seconds)" >> "$SYNC_LOGS/$LOG_FILE"
 echo ">> ---" >> "$SYNC_LOGS/$LOG_FILE"
 #starting rsync
 
-rsync -6 -av --delete-after \
+rsync -6 -av --delete-after --ignore-errors \
 --exclude *ia64* \
 --exclude *powerpc* --exclude *sparc* \
 --exclude *dapper* --exclude *hardy* --exclude *intrepid* \
@@ -50,7 +50,7 @@ rsync -6 -av --delete-after \
 --exclude *.iso \
 --exclude *.orig.tar.gz --exclude *.diff.gz \
 --exclude *.dsc \
-$SYNC_SERVER $SYNC_FILES >> $SYNC_LOGS/$LOG_FILE
+$SYNC_SERVER $SYNC_FILES &>> $SYNC_LOGS/$LOG_FILE
 
 set_stat $STAT_FILE "status" $?
 set_stat $STAT_FILE "lastsync" "`date --rfc-3339=seconds|sed 's/\ /\\ /'`"

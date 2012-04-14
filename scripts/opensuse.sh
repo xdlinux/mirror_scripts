@@ -11,8 +11,8 @@ source  `dirname $0`/functions.d/functions
 # Filesystem locations for the sync operations
 SYNC_HOME="/home/bigeagle/mirror"
 SYNC_LOGS="$SYNC_HOME/logs/opensuese"
-SYNC_FILES="/srv/ftp/opensuese/"
-SYNC_LOCK="$SYNC_HOME/opensuese.lck"
+SYNC_FILES="/srv/ftp/openSUSE/"
+SYNC_LOCK="$SYNC_HOME/opensuse.lck"
 SYNC_SERVER="rsync://mirror6.bjtu.edu.cn/opensuse/"
 LOG_FILE="opensuese_$(date +%Y%m%d-%H).log"
 
