@@ -15,7 +15,7 @@ SYNC_LOGS="$SYNC_HOME/logs/rpmfusion"
 SYNC_LOCK="$SYNC_HOME/$REPONAME.lck"
 SYNC_REPO=(i386 x86_64)
 SYNC_FREE=(free nonfree)
-FVERS=(14 15)
+FVERS=(15 16)
 SERVER_BASE="rsync://mirror.yandex.ru/fedora/rpmfusion/"
 SYNC_DIR="/srv/ftp/fedora/rpmfusion"
 
